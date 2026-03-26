@@ -1,127 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Me Chat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body {
-      font-family: Arial, sans-serif;
-      background:#ece5dd;
-      display:flex;
-      flex-direction:column;
-      height:100vh;
-      justify-content:flex-end;
-      align-items:center;
-    }
-
-    #status-box {
-      width:100%;
-      max-width:400px;
-      text-align:center;
-      font-size:13px;
-      margin:5px 0;
-      color:#555;
-    }
-
-    #chat-box {
-      width:100%;
-      max-width:400px;
-      flex:1;
-      background:#fff;
-      border-radius:10px 10px 0 0;
-      padding:10px;
-      overflow-y:auto;
-      display:flex;
-      flex-direction:column;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      box-shadow:0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .message {
-      padding:10px 15px;
-      margin:5px 0;
-      border-radius:20px;
-      max-width:75%;
-      word-wrap:break-word;
-      font-size:15px;
-      position: relative;
-      display:inline-block;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-      line-height:1.4;
-    }
-
-    .me {
-      align-self:flex-end;
-      background:#dcf8c6;
-      color:#000;
-      border-bottom-right-radius:2px;
-    }
-
-    .other {
-      align-self:flex-start;
-      background:#fff;
-      border:1px solid #ccc;
-      color:#000;
-      border-bottom-left-radius:2px;
-    }
-
-    .timestamp {
-      font-size:10px;
-      color:#999;
-      margin-left:5px;
-    }
-
-    .checkmark {
-      font-size:12px;
-      color:#4fc3f7;
-      margin-left:3px;
-    }
-
-    #input-area {
-      width:100%;
-      max-width:400px;
-      display:flex;
-      padding:10px;
-      background:#f0f0f0;
-      border-top:1px solid #ccc;
-    }
-
-    #message {
-      flex:1;
-      padding:12px 18px;
-      border-radius:25px;
-      border:1px solid #ccc;
-      font-size:15px;
-      outline:none;
-    }
-
-    #send-btn {
-      padding:12px 20px;
-      margin-left:10px;
-      border:none;
-      border-radius:25px;
-      background:#075e54;
-      color:#fff;
-      font-weight:bold;
-      cursor:pointer;
-    }
-
-    #send-btn:hover { background:#128c7e; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Me Chat</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#e0eafc,#cfdef3);display:flex;flex-direction:column;height:100vh;justify-content:flex-end;align-items:center;}
+  #status-box{width:100%;max-width:400px;text-align:center;font-size:13px;margin:5px 0;color:#555;}
+  #chat-box{width:100%;max-width:400px;flex:1;background:rgba(255,255,255,0.2);backdrop-filter:blur(15px);border-radius:20px 20px 0 0;padding:10px;overflow-y:auto;display:flex;flex-direction:column;scroll-behavior:smooth;box-shadow:0 8px 32px rgba(0,0,0,0.2);}
+  .message{padding:12px 18px;margin:6px 0;border-radius:20px;max-width:70%;font-size:15px;position:relative;display:inline-block;line-height:1.4;word-wrap:break-word;backdrop-filter:blur(10px);}
+  .me{align-self:flex-end;background:rgba(220,248,198,0.8);color:#000;}
+  .other{align-self:flex-start;background:rgba(255,255,255,0.8);color:#000;}
+  .timestamp{font-size:10px;color:#555;position:absolute;bottom:4px;right:10px;}
+  .checkmark{font-size:12px;color:#4fc3f7;margin-left:3px;}
+  .date-separator{text-align:center;font-size:12px;color:#777;margin:10px 0;}
+  #input-area{width:100%;max-width:400px;display:flex;padding:10px;background:rgba(255,255,255,0.2);backdrop-filter:blur(15px);border-top:1px solid rgba(255,255,255,0.3);border-radius:0 0 20px 20px;}
+  #message{flex:1;padding:12px 18px;border-radius:25px;border:1px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.3);font-size:15px;outline:none;color:#000;}
+  #send-btn,#file-btn,#emoji-btn,#voice-btn{padding:12px 15px;margin-left:5px;border:none;border-radius:25px;background:#075e54;color:#fff;font-weight:bold;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.3);}
+  #send-btn:hover,#file-btn:hover,#emoji-btn:hover,#voice-btn:hover{background:#128c7e;}
+  #emoji-picker{position:absolute;bottom:60px;left:10px;display:none;max-width:400px;background:#fff;border-radius:10px;padding:5px;flex-wrap:wrap;box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+  .emoji{cursor:pointer;padding:5px;font-size:20px;}
+</style>
 </head>
 <body>
 
 <div id="status-box">Loading...</div>
 <div id="chat-box"></div>
-
 <div id="input-area">
+  <button id="emoji-btn">😀</button>
   <input type="text" id="message" placeholder="Type a message...">
-  <button id="send-btn" onclick="sendMessage()">Send</button>
+  <input type="file" id="file-btn" style="display:none;">
+  <button id="send-btn">Send</button>
+  <button id="voice-btn">🎤</button>
 </div>
+<div id="emoji-picker"></div>
 
-<script type="module" src="script.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+// ----- Firebase config -----
+const firebaseConfig = {
+  apiKey: "AIzaSyDoc9kVka1AGCXJopS7CqC9f4ikNa_2iH8",
+  authDomain: "chatapp-7a6a2.firebaseapp.com",
+  projectId: "chatapp-7a6a2",
+  storageBucket: "chatapp-7a6a2.appspot.com"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// ----- Secret code -----
+const secretCode = "sunshine2026"; // your secret code
+
+// Function to prompt for code
+function requireSecretCode() {
+  let code = prompt("Enter the chat secret code:");
+  if(code !== secretCode){
+    alert("Access Denied ❌");
+    // Hide chat if wrong code
+    document.getElementById("chat-box").style.display = "none";
+    document.getElementById("input-area").style.display = "none";
+    document.getElementById("status-box").textContent = "Access Denied ❌";
+    return false;
+  } else {
+    // Show chat if correct
+    document.getElementById("chat-box").style.display = "flex";
+    document.getElementById("input-area").style.display = "flex";
+    return true;
+  }
+}
+
+// First-time prompt
+requireSecretCode();
+
+// Every 3 minutes (180000 ms) require code again
+setInterval(() => {
+  requireSecretCode();
+}, 180000); // 3 minutes
+
+// ----- User -----
+const user = prompt("Enter your name:") || "Me";
+const room = "private-chat";
+const statusDoc = doc(db, `rooms/${room}/status/${user}`);
+await setDoc(statusDoc, { name:user, online:true, typing:false }, { merge:true });
+
+// ----- Elements -----
+const chatBox = document.getElementById("chat-box");
+const input = document.getElementById("message");
+const fileBtn = document.getElementById("file-btn");
+const emojiBtn = document.getElementById("emoji-btn");
+const emojiPicker = document.getElementById("emoji-picker");
+
+// ----- Emoji Picker -----
+const emojis = ["😀","😃","😂","😍","😘","😎","🤩","😜","😭","😡","👍","🙏","💖","🎉","🔥","💯","✅","❌","🎁","🥰","🤪"];
+emojis.forEach(e=>{
+  const span = document.createElement("span");
+  span.textContent=e;
+  span.className="emoji";
+  span.onclick=()=>{ input.value+=e; input.focus(); emojiPicker.style.display="none"; };
+  emojiPicker.appendChild(span);
+});
+emojiBtn.onclick=()=>{ emojiPicker.style.display=emojiPicker.style.display==="none"?"flex":"none"; };
+
+// ----- Typing -----
+input.addEventListener("input", async ()=>{ await setDoc(statusDoc,{online:true,typing:input.value.trim()!==""},{merge:true}); });
+window.addEventListener("beforeunload", async ()=>{ await setDoc(statusDoc,{online:false,typing:false},{merge:true}); });
+
+// ----- Send message -----
+async function sendMessage(type="text", url=null){
+  const msg=input.value.trim();
+  if(!msg && !url) return;
+  await addDoc(collection(db, `rooms/${room}/messages`),{
+    text: msg,
+    sender: user,
+    time: Date.now(),
+    type,
+    url
+  });
+  input.value="";
+  await setDoc(statusDoc,{online:true,typing:false},{merge:true});
+}
+document.getElementById("send-btn").onclick=()=>sendMessage();
+
+// ----- File upload -----
+fileBtn.onchange=async e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+  const storageRef=ref(storage, `rooms/${room}/${Date.now()}_${file.name}`);
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+  let type="file";
+  if(file.type.startsWith("image/")) type="image";
+  else if(file.type==="application/pdf") type="pdf";
+  else if(file.type.startsWith("audio/")) type="voice";
+  await sendMessage(type,url);
+  fileBtn.value="";
+};
+document.getElementById("voice-btn").onclick=()=>{
+let mediaRecorder;
+let audioChunks = [];
+
+document.getElementById("voice-btn").onclick = async () => {
+  // Check if recording is already active
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    mediaRecorder.stop(); // stop recording
+    return;
+  }
+
+  // Request microphone access
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = new MediaRecorder(stream);
+  audioChunks = [];
+
+  mediaRecorder.ondataavailable = e => {
+    audioChunks.push(e.data);
+  };
+
+  mediaRecorder.onstop = async () => {
+    const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+    const fileName = `voice_${Date.now()}.webm`;
+    const storageRef = ref(storage, `rooms/${room}/${fileName}`);
+    await uploadBytes(storageRef, audioBlob);
+    const url = await getDownloadURL(storageRef);
+
+    // Send message as voice type
+    await sendMessage("voice", url);
+  };
+
+  mediaRecorder.start();
+  alert("Recording started 🎙️ Click voice button again to stop.");
+};};
+chatBox.onclick=()=>{ emojiPicker.style.display="none"; };
+
+// ----- Real-time messages -----
+function formatTime(ts){
+  const time=new Date(ts);
+  let hours=time.getHours();
+  const minutes=time.getMinutes().toString().padStart(2,'0');
+  const ampm = hours>=12?"PM":"AM";
+  hours=hours%12||12;
+  return `${hours}:${minutes} ${ampm}`;
+}
+
+function formatDate(ts){
+  const today=new Date(); const msgDate=new Date(ts);
+  if(today.toDateString()===msgDate.toDateString()) return "Today";
+  const yesterday=new Date(); yesterday.setDate(today.getDate()-1);
+  if(yesterday.toDateString()===msgDate.toDateString()) return "Yesterday";
+  return msgDate.toLocaleDateString();
+}
+
+const q=query(collection(db,`rooms/${room}/messages`),orderBy("time"));
+let lastDate="";
+onSnapshot(q,snapshot=>{
+  chatBox.innerHTML="";
+  lastDate="";
+  snapshot.forEach(doc=>{
+    const data=doc.data();
+    const date=formatDate(data.time);
+    if(date!==lastDate){
+      const div=document.createElement("div");
+      div.className="date-separator"; div.textContent=date; chatBox.appendChild(div);
+      lastDate=date;
+    }
+    const div=document.createElement("div");
+    div.classList.add("message",data.sender===user?"me":"other");
+    if(data.type==="image") div.innerHTML=`<img src="${data.url}" style="max-width:70%;border-radius:10px;"><span class="timestamp">${formatTime(data.time)}</span>`;
+    else if(data.type==="pdf") div.innerHTML=`<a href="${data.url}" target="_blank">📄 PDF</a><span class="timestamp">${formatTime(data.time)}</span>`;
+    else if(data.type==="voice") div.innerHTML=`<audio controls src="${data.url}"></audio><span class="timestamp">${formatTime(data.time)}</span>`;
+    else div.innerHTML=`${data.text}<span class="timestamp">${formatTime(data.time)}</span> ${data.sender===user?'<span class="checkmark">✔✔</span>':''}`;
+    chatBox.appendChild(div);
+  });
+  chatBox.scrollTo({top:chatBox.scrollHeight,behavior:"smooth"});
+});
+
+// ----- Status -----
+const statusQuery=collection(db,`rooms/${room}/status`);
+const statusBox=document.getElementById("status-box");
+onSnapshot(statusQuery,snapshot=>{
+  let onlineUsers=[],typingUsers=[];
+  snapshot.forEach(doc=>{
+    const data=doc.data();
+    if(doc.id!==user && data.online) onlineUsers.push(data.name||doc.id);
+    if(doc.id!==user && data.typing) typingUsers.push(data.name||doc.id);
+  });
+  let statusText="";
+  if(onlineUsers.length) statusText+=`${onlineUsers.join(", ")} online`;
+  if(typingUsers.length) statusText+=typingUsers.length?` • ${typingUsers.join(", ")} typing...`:"";
+  statusBox.textContent=statusText||"No one online";
+});
+</script>
 </body>
 </html>
