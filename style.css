@@ -1,0 +1,14 @@
+* { box-sizing:border-box; margin:0; padding:0;}
+body { font-family:Arial; background:#e5ddd5; display:flex; justify-content:center; align-items:center; height:100vh;}
+.chat-container { width:100%; max-width:400px; height:90vh; background:#f0f0f0; border-radius:10px; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+header { background:#075e54; color:white; padding:15px; text-align:center; position:relative;}
+.status { font-size:14px; margin-top:5px; }
+.chat-box { flex:1; padding:10px; overflow-y:auto; display:flex; flex-direction:column;}
+.chat-box p { max-width:70%; margin:5px 0; padding:8px 12px; border-radius:20px; word-wrap:break-word; position:relative; }
+.chat-box .me { align-self:flex-end; background:#dcf8c6;}
+.chat-box .other { align-self:flex-start; background:#fff;}
+.chat-box .read-receipt { font-size:10px; color:#555; position:absolute; bottom:2px; right:5px;}
+.typing { font-size:14px; color:#555; padding-left:10px; min-height:18px;}
+.input-container { display:flex; padding:10px; background:#eee;}
+input { flex:1; padding:10px; border-radius:20px; border:1px solid #ccc; outline:none;}
+button { margin-left:10px; padding:10px 12px; border:none; border-radius:20px; background:#075e54; color:white; cursor:pointer;}
