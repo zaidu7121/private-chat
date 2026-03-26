@@ -3,188 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Me Chat</title>
+<title>Pro Chat with Instant Reactions</title>
 <style>
-  * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: flex-end;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* Status Box */
-#status-box {
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  font-size: 13px;
-  margin: 5px 0;
-  color: #555;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 4px 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Chat Box */
-#chat-box {
-  width: 100%;
-  max-width: 400px;
-  flex: 1;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  border-radius: 20px 20px 0 0;
-  padding: 12px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  scroll-behavior: smooth;
-
-  /* iOS smooth scrolling */
-  -webkit-overflow-scrolling: touch;
-
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
-/* Messages */
-.message {
-  padding: 12px 18px;
-  margin: 6px 0;
-  border-radius: 20px;
-  max-width: 70%;
-  font-size: 15px;
-  position: relative;
-  display: inline-block;
-  line-height: 1.4;
-  word-wrap: break-word;
-  backdrop-filter: blur(10px);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.message:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.me {
-  align-self: flex-end;
-  background: rgba(220, 248, 198, 0.85);
-  color: #000;
-}
-
-.other {
-  align-self: flex-start;
-  background: rgba(255, 255, 255, 0.85);
-  color: #000;
-}
-
-.timestamp {
-  font-size: 10px;
-  color: #555;
-  position: absolute;
-  bottom: 4px;
-  right: 10px;
-}
-
-.checkmark {
-  font-size: 12px;
-  color: #4fc3f7;
-  margin-left: 3px;
-}
-
-.date-separator {
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-  margin: 10px 0;
-}
-
-/* Input Area */
-#input-area {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Message Input */
-#message {
-  flex: 1;
-  padding: 12px 18px;
-  border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.25);
-  font-size: 15px;
-  outline: none;
-  color: #000;
-  transition: background 0.2s, box-shadow 0.2s;
-}
-
-#message:focus {
-  background: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Buttons */
-#send-btn, #file-btn, #emoji-btn, #voice-btn {
-  padding: 12px 15px;
-  margin-left: 5px;
-  border: none;
-  border-radius: 25px;
-  background: #075e54;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s, transform 0.1s;
-}
-
-#send-btn:hover, #file-btn:hover, #emoji-btn:hover, #voice-btn:hover {
-  background: #128c7e;
-  transform: translateY(-1px);
-}
-
-/* Emoji Picker */
-#emoji-picker {
-  position: absolute;
-  bottom: 70px;
-  left: 10px;
-  display: none;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 6px;
-  flex-wrap: wrap;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(15px);
-}
-
-.emoji {
-  cursor: pointer;
-  padding: 6px;
-  font-size: 22px;
-  transition: transform 0.2s;
-}
-
-.emoji:hover {
-  transform: scale(1.3);
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#e0eafc,#cfdef3);display:flex;flex-direction:column;height:100vh;justify-content:flex-end;align-items:center;overflow:hidden;}
+#status-box{width:100%;max-width:400px;text-align:center;font-size:13px;margin:5px 0;color:#555;backdrop-filter:blur(10px);background:rgba(255,255,255,0.2);border-radius:12px;padding:4px 8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+#chat-box{width:100%;max-width:400px;flex:1;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);border-radius:20px 20px 0 0;padding:12px;overflow-y:auto;display:flex;flex-direction:column;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;box-shadow:0 10px 40px rgba(0,0,0,0.2);}
+.message{padding:12px 18px;margin:6px 0;border-radius:20px;max-width:70%;font-size:15px;position:relative;display:inline-block;line-height:1.4;word-wrap:break-word;backdrop-filter:blur(10px);transition:transform 0.2s,box-shadow 0.2s;}
+.message:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.me{align-self:flex-end;background:rgba(220,248,198,0.85);color:#000;}
+.other{align-self:flex-start;background:rgba(255,255,255,0.85);color:#000;}
+.timestamp{font-size:10px;color:#555;position:absolute;bottom:4px;right:10px;}
+.reactions{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap;}
+.reaction-btn{cursor:pointer;border-radius:12px;padding:2px 5px;font-size:14px;transition:transform 0.2s;}
+.reaction-btn:hover{transform:scale(1.3);}
+.reaction-bar{position:absolute;display:flex;gap:5px;padding:4px 8px;background:#fff;border-radius:30px;box-shadow:0 4px 12px rgba(0,0,0,0.2);opacity:0;pointer-events:none;transition:opacity 0.15s,transform 0.15s;}
+.reaction-bar.show{opacity:1;pointer-events:auto;transform:translateY(-10px);}
+#input-area{width:100%;max-width:400px;display:flex;padding:12px;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.3);border-radius:0 0 20px 20px;box-shadow:0 -4px 20px rgba(0,0,0,0.1);}
+#message{flex:1;padding:12px 18px;border-radius:25px;border:1px solid rgba(255,255,255,0.5);background:rgba(255,255,255,0.25);font-size:15px;outline:none;color:#000;transition:background 0.2s,box-shadow 0.2s;}
+#message:focus{background:rgba(255,255,255,0.35);box-shadow:0 0 10px rgba(0,0,0,0.1);}
+#send-btn,#gif-btn,#emoji-picker-btn{padding:12px 15px;margin-left:5px;border:none;border-radius:25px;background:#075e54;color:#fff;font-weight:bold;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.3);transition:background 0.2s,transform 0.1s;}
+#send-btn:hover,#gif-btn:hover,#emoji-picker-btn:hover{background:#128c7e;transform:translateY(-1px);}
+#gif-picker,#emoji-picker{position:absolute;bottom:70px;left:10px;display:none;max-width:400px;background:rgba(255,255,255,0.95);border-radius:12px;padding:6px;flex-wrap:wrap;box-shadow:0 6px 16px rgba(0,0,0,0.25);backdrop-filter:blur(15px);overflow-y:auto;max-height:300px;}
+.gif-img,.emoji{cursor:pointer;width:60px;height:60px;margin:3px;border-radius:12px;object-fit:cover;transition:transform 0.2s;font-size:24px;display:flex;align-items:center;justify-content:center;text-align:center;}
+.gif-img:hover,.emoji:hover{transform:scale(1.2);}
 </style>
 </head>
 <body>
@@ -192,210 +34,144 @@ body {
 <div id="status-box">Loading...</div>
 <div id="chat-box"></div>
 <div id="input-area">
-  <button id="emoji-btn">😀</button>
   <input type="text" id="message" placeholder="Type a message...">
-  <input type="file" id="file-btn" style="display:none;">
+  <button id="emoji-picker-btn">😀</button>
+  <button id="gif-btn">GIF</button>
   <button id="send-btn">Send</button>
-  <button id="voice-btn">🎤</button>
 </div>
+<div id="gif-picker"></div>
 <div id="emoji-picker"></div>
+<div id="reaction-bar" class="reaction-bar"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// ----- Firebase config -----
-const firebaseConfig = {
-  apiKey: "AIzaSyDoc9kVka1AGCXJopS7CqC9f4ikNa_2iH8",
-  authDomain: "chatapp-7a6a2.firebaseapp.com",
-  projectId: "chatapp-7a6a2",
-  storageBucket: "chatapp-7a6a2.appspot.com"
-};
+// Firebase
+const firebaseConfig={ apiKey:"AIza...", authDomain:"chatapp-7a6a2.firebaseapp.com", projectId:"chatapp-7a6a2", storageBucket:"chatapp-7a6a2.appspot.com" };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
-// ----- Secret code -----
-const secretCode = "sunshine2026"; // your secret code
-
-// Function to prompt for code
-function requireSecretCode() {
-  let code = prompt("Enter the chat secret code:");
-  if(code !== secretCode){
-    alert("Access Denied ❌");
-    // Hide chat if wrong code
-    document.getElementById("chat-box").style.display = "none";
-    document.getElementById("input-area").style.display = "none";
-    document.getElementById("status-box").textContent = "Access Denied ❌";
-    return false;
-  } else {
-    // Show chat if correct
-    document.getElementById("chat-box").style.display = "flex";
-    document.getElementById("input-area").style.display = "flex";
-    return true;
-  }
-}
-
-// First-time prompt
-requireSecretCode();
-
-// Every 3 minutes (180000 ms) require code again
-setInterval(() => {
-  requireSecretCode();
-}, 180000); // 3 minutes
-
-// ----- User -----
+// User
 const user = prompt("Enter your name:") || "Me";
 const room = "private-chat";
-const statusDoc = doc(db, `rooms/${room}/status/${user}`);
-await setDoc(statusDoc, { name:user, online:true, typing:false }, { merge:true });
 
-// ----- Elements -----
-const chatBox = document.getElementById("chat-box");
-const input = document.getElementById("message");
-const fileBtn = document.getElementById("file-btn");
-const emojiBtn = document.getElementById("emoji-btn");
-const emojiPicker = document.getElementById("emoji-picker");
+// Elements
+const chatBox=document.getElementById("chat-box");
+const input=document.getElementById("message");
+const sendBtn=document.getElementById("send-btn");
+const gifBtn=document.getElementById("gif-btn");
+const emojiPickerBtn=document.getElementById("emoji-picker-btn");
+const gifPicker=document.getElementById("gif-picker");
+const emojiPicker=document.getElementById("emoji-picker");
+const reactionBar=document.getElementById("reaction-bar");
 
-// ----- Emoji Picker -----
-const emojis = ["😀","😃","😂","😍","😘","😎","🤩","😜","😭","😡","👍","🙏","💖","🎉","🔥","💯","✅","❌","🎁","🥰","🤪"];
+// Emoji list
+const emojis=["😀","😂","😍","😘","👍","💖","🎉","🔥","✅"];
 emojis.forEach(e=>{
-  const span = document.createElement("span");
-  span.textContent=e;
+  const span=document.createElement("div");
   span.className="emoji";
-  span.onclick=()=>{ input.value+=e; input.focus(); emojiPicker.style.display="none"; };
+  span.textContent=e;
+  span.onclick=()=>{ sendMessage(e,null); emojiPicker.style.display="none"; };
   emojiPicker.appendChild(span);
 });
-emojiBtn.onclick=()=>{ emojiPicker.style.display=emojiPicker.style.display==="none"?"flex":"none"; };
+emojiPickerBtn.onclick=()=>{ emojiPicker.style.display=emojiPicker.style.display==="none"?"flex":"none"; };
 
-// ----- Typing -----
-input.addEventListener("input", async ()=>{ await setDoc(statusDoc,{online:true,typing:input.value.trim()!==""},{merge:true}); });
-window.addEventListener("beforeunload", async ()=>{ await setDoc(statusDoc,{online:false,typing:false},{merge:true}); });
-
-// ----- Send message -----
-async function sendMessage(type="text", url=null){
-  const msg=input.value.trim();
-  if(!msg && !url) return;
-  await addDoc(collection(db, `rooms/${room}/messages`),{
-    text: msg,
-    sender: user,
-    time: Date.now(),
-    type,
-    url
+// Send message
+async function sendMessage(text=null,gif=null){
+  if(!text && !gif) return;
+  await addDoc(collection(db,`rooms/${room}/messages`),{
+    text:text||"",
+    gif:gif||null,
+    sender:user,
+    reactions:[],
+    time:Date.now()
   });
   input.value="";
-  await setDoc(statusDoc,{online:true,typing:false},{merge:true});
 }
-document.getElementById("send-btn").onclick=()=>sendMessage();
+sendBtn.onclick=()=>sendMessage(input.value);
 
-// ----- File upload -----
-fileBtn.onchange=async e=>{
-  const file=e.target.files[0];
-  if(!file) return;
-  const storageRef=ref(storage, `rooms/${room}/${Date.now()}_${file.name}`);
-  await uploadBytes(storageRef, file);
-  const url = await getDownloadURL(storageRef);
-  let type="file";
-  if(file.type.startsWith("image/")) type="image";
-  else if(file.type==="application/pdf") type="pdf";
-  else if(file.type.startsWith("audio/")) type="voice";
-  await sendMessage(type,url);
-  fileBtn.value="";
+// GIF picker
+const TENOR_API_KEY="YOUR_TENOR_API_KEY";
+gifBtn.onclick=async()=>{
+  gifPicker.style.display=gifPicker.style.display==="none"?"flex":"none";
+  if(gifPicker.childElementCount>0) return;
+  const res = await fetch(`https://tenor.googleapis.com/v2/search?q=funny&key=${TENOR_API_KEY}&limit=20`);
+  const data = await res.json();
+  data.results.forEach(g=>{
+    const img=document.createElement("img");
+    img.src=g.media_formats.gif.url;
+    img.className="gif-img";
+    img.onclick=()=>{ sendMessage(null,img.src); gifPicker.style.display="none"; };
+    gifPicker.appendChild(img);
+  });
 };
-document.getElementById("voice-btn").onclick=()=>{
-let mediaRecorder;
-let audioChunks = [];
 
-document.getElementById("voice-btn").onclick = async () => {
-  // Check if recording is already active
-  if (mediaRecorder && mediaRecorder.state === "recording") {
-    mediaRecorder.stop(); // stop recording
-    return;
-  }
-
-  // Request microphone access
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  mediaRecorder = new MediaRecorder(stream);
-  audioChunks = [];
-
-  mediaRecorder.ondataavailable = e => {
-    audioChunks.push(e.data);
-  };
-
-  mediaRecorder.onstop = async () => {
-    const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-    const fileName = `voice_${Date.now()}.webm`;
-    const storageRef = ref(storage, `rooms/${room}/${fileName}`);
-    await uploadBytes(storageRef, audioBlob);
-    const url = await getDownloadURL(storageRef);
-
-    // Send message as voice type
-    await sendMessage("voice", url);
-  };
-
-  mediaRecorder.start();
-  alert("Recording started 🎙️ Click voice button again to stop.");
-};};
-chatBox.onclick=()=>{ emojiPicker.style.display="none"; };
-
-// ----- Real-time messages -----
-function formatTime(ts){
-  const time=new Date(ts);
-  let hours=time.getHours();
-  const minutes=time.getMinutes().toString().padStart(2,'0');
-  const ampm = hours>=12?"PM":"AM";
-  hours=hours%12||12;
-  return `${hours}:${minutes} ${ampm}`;
-}
-
-function formatDate(ts){
-  const today=new Date(); const msgDate=new Date(ts);
-  if(today.toDateString()===msgDate.toDateString()) return "Today";
-  const yesterday=new Date(); yesterday.setDate(today.getDate()-1);
-  if(yesterday.toDateString()===msgDate.toDateString()) return "Yesterday";
-  return msgDate.toLocaleDateString();
-}
-
+// Render messages
 const q=query(collection(db,`rooms/${room}/messages`),orderBy("time"));
-let lastDate="";
 onSnapshot(q,snapshot=>{
   chatBox.innerHTML="";
-  lastDate="";
-  snapshot.forEach(doc=>{
-    const data=doc.data();
-    const date=formatDate(data.time);
-    if(date!==lastDate){
-      const div=document.createElement("div");
-      div.className="date-separator"; div.textContent=date; chatBox.appendChild(div);
-      lastDate=date;
-    }
+  snapshot.forEach(docSnap=>{
+    const data=docSnap.data();
     const div=document.createElement("div");
     div.classList.add("message",data.sender===user?"me":"other");
-    if(data.type==="image") div.innerHTML=`<img src="${data.url}" style="max-width:70%;border-radius:10px;"><span class="timestamp">${formatTime(data.time)}</span>`;
-    else if(data.type==="pdf") div.innerHTML=`<a href="${data.url}" target="_blank">📄 PDF</a><span class="timestamp">${formatTime(data.time)}</span>`;
-    else if(data.type==="voice") div.innerHTML=`<audio controls src="${data.url}"></audio><span class="timestamp">${formatTime(data.time)}</span>`;
-    else div.innerHTML=`${data.text}<span class="timestamp">${formatTime(data.time)}</span> ${data.sender===user?'<span class="checkmark">✔✔</span>':''}`;
+
+    if(data.text) div.innerHTML=`${data.text} <span class="timestamp">${new Date(data.time).toLocaleTimeString()}</span>`;
+    if(data.gif){
+      const img=document.createElement("img");
+      img.src=data.gif;
+      img.style.width="200px"; img.style.borderRadius="12px"; img.style.display="block"; img.style.marginTop="6px";
+      div.appendChild(img);
+    }
+
+    // Show reactions
+    const reactionDiv=document.createElement("div");
+    reactionDiv.className="reactions";
+    if(data.reactions && data.reactions.length){
+      data.reactions.forEach(r=>{
+        const btn=document.createElement("div");
+        btn.className="reaction-btn";
+        btn.textContent=`${r.emoji} ${r.count}`;
+        reactionDiv.appendChild(btn);
+      });
+    }
+    div.appendChild(reactionDiv);
+
+    // Hover / Long press reaction
+    let holdTimeout;
+    const showBar=(e)=>{
+      reactionBar.style.left=e.clientX+"px";
+      reactionBar.style.top=(e.clientY-50)+"px";
+      reactionBar.innerHTML="";
+      emojis.forEach(em=>{
+        const btn=document.createElement("div");
+        btn.className="emoji";
+        btn.textContent=em;
+        btn.onclick=()=>{ addReaction(docSnap.id,em); reactionBar.classList.remove("show"); };
+        reactionBar.appendChild(btn);
+      });
+      reactionBar.classList.add("show");
+    };
+    div.onmouseenter=showBar;
+    div.onmouseleave=()=>reactionBar.classList.remove("show");
+    div.ontouchstart=e=>holdTimeout=setTimeout(()=>showBar(e.touches[0]),600);
+    div.ontouchend=e=>clearTimeout(holdTimeout);
+
     chatBox.appendChild(div);
   });
   chatBox.scrollTo({top:chatBox.scrollHeight,behavior:"smooth"});
 });
 
-// ----- Status -----
-const statusQuery=collection(db,`rooms/${room}/status`);
-const statusBox=document.getElementById("status-box");
-onSnapshot(statusQuery,snapshot=>{
-  let onlineUsers=[],typingUsers=[];
-  snapshot.forEach(doc=>{
-    const data=doc.data();
-    if(doc.id!==user && data.online) onlineUsers.push(data.name||doc.id);
-    if(doc.id!==user && data.typing) typingUsers.push(data.name||doc.id);
-  });
-  let statusText="";
-  if(onlineUsers.length) statusText+=`${onlineUsers.join(", ")} online`;
-  if(typingUsers.length) statusText+=typingUsers.length?` • ${typingUsers.join(", ")} typing...`:"";
-  statusBox.textContent=statusText||"No one online";
-});
+// Add reaction
+async function addReaction(msgId,emoji){
+  const msgRef=doc(db,`rooms/${room}/messages/${msgId}`);
+  const msgSnap = await msgRef.get();
+  let reactions=(msgSnap.data().reactions||[]);
+  const idx=reactions.findIndex(r=>r.emoji===emoji);
+  if(idx>-1) reactions[idx].count+=1;
+  else reactions.push({emoji,count:1});
+  await updateDoc(msgRef,{reactions});
+}
 </script>
 </body>
 </html>
