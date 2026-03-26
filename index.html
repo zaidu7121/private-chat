@@ -76,7 +76,255 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+/* ---------------------- Reset ---------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+/* ---------------------- Body ---------------------- */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+/* ---------------------- Status Box ---------------------- */
+#status-box {
+  width: 95%;
+  max-width: 400px;
+  text-align: center;
+  font-size: 13px;
+  margin: 5px 0;
+  color: #555;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 4px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------- Chat Box ---------------------- */
+#chat-box {
+  width: 95%;
+  max-width: 400px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px 20px 0 0;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------------- Messages ---------------------- */
+.message {
+  padding: 12px 18px;
+  margin: 6px 0;
+  border-radius: 20px;
+  max-width: 70%;
+  font-size: 14px;
+  position: relative;
+  display: inline-block;
+  line-height: 1.4;
+  word-wrap: break-word;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.message:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.me {
+  align-self: flex-end;
+  background: rgba(220, 248, 198, 0.85);
+  color: #000;
+}
+
+.other {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.85);
+  color: #000;
+}
+
+/* Timestamp & Checkmark */
+.timestamp {
+  font-size: 10px;
+  color: #555;
+  position: absolute;
+  bottom: 4px;
+  right: 10px;
+}
+
+.checkmark {
+  font-size: 12px;
+  color: #4fc3f7;
+  margin-left: 3px;
+}
+
+/* Date Separator */
+.date-separator {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin: 10px 0;
+}
+
+/* ---------------------- Input Area ---------------------- */
+#input-area {
+  width: 95%;
+  max-width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------- Message Input ---------------------- */
+#message {
+  flex: 1 1 60%;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 14px;
+  outline: none;
+  color: #000;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+#message:focus {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------- Buttons ---------------------- */
+#send-btn, #file-btn, #emoji-btn, #voice-btn {
+  flex: 1 1 20%;
+  min-width: 50px;
+  margin: 3px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 25px;
+  background: #075e54;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s, transform 0.1s;
+}
+
+#send-btn:hover, #file-btn:hover, #emoji-btn:hover, #voice-btn:hover {
+  background: #128c7e;
+  transform: translateY(-1px);
+}
+
+/* ---------------------- Emoji Picker ---------------------- */
+#emoji-picker {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  z-index: 1000;
+}
+
+.emoji {
+  cursor: pointer;
+  padding: 6px;
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+
+.emoji:hover {
+  transform: scale(1.3);
+}
+
+/* ---------------------- Images & Media ---------------------- */
+.message img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+audio {
+  width: 100%;
+}
+
+/* ---------------------- Media Queries (Small Screens) ---------------------- */
+@media (max-width: 400px) {
+  body {
+    font-size: 13px;
+  }
+  .message {
+    font-size: 13px;
+    padding: 8px 12px;
+    max-width: 80%;
+  }
+  #message {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  #input-area {
+    padding: 8px;
+  }
+  #emoji-picker {
+    bottom: 55px;
+  }
+  .timestamp {
+    font-size: 9px;
+  }
+  .checkmark {
+    font-size: 11px;
+  }
+  .date-separator {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 350px) {
+  body {
+    font-size: 12px;
+  }
+  .message {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  #message {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  #input-area {
+    padding: 6px;
+  }
+}
 .me {
   align-self: flex-end;
   background: rgba(220, 248, 198, 0.85);
@@ -103,88 +351,6 @@ body {
   margin-left: 3px;
 }
 
-.date-separator {
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-  margin: 10px 0;
-}
-
-/* Input Area */
-#input-area {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Message Input */
-#message {
-  flex: 1;
-  padding: 12px 18px;
-  border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.25);
-  font-size: 15px;
-  outline: none;
-  color: #000;
-  transition: background 0.2s, box-shadow 0.2s;
-}
-
-#message:focus {
-  background: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Buttons */
-#send-btn, #file-btn, #emoji-btn, #voice-btn {
-  padding: 12px 15px;
-  margin-left: 5px;
-  border: none;
-  border-radius: 25px;
-  background: #075e54;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s, transform 0.1s;
-}
-
-#send-btn:hover, #file-btn:hover, #emoji-btn:hover, #voice-btn:hover {
-  background: #128c7e;
-  transform: translateY(-1px);
-}
-
-/* Emoji Picker */
-#emoji-picker {
-  position: absolute;
-  bottom: 70px;
-  left: 10px;
-  display: none;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 6px;
-  flex-wrap: wrap;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(15px);
-}
-
-.emoji {
-  cursor: pointer;
-  padding: 6px;
-  font-size: 22px;
-  transition: transform 0.2s;
-}
-
-.emoji:hover {
-  transform: scale(1.3);
-}
 </style>
 </head>
 <body>
